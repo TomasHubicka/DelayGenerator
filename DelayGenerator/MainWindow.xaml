@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DelayGenerator"
+        xmlns:viewmodels="clr-namespace:DelayGenerator.ViewModels"
         mc:Ignorable="d"
-        Title="Delay Generator" Height="450" Width="600" MinHeight="450" MinWidth="600" MaxHeight="450" MaxWidth="600">
+        Title="{Binding Title}" Height="450" Width="600" MinHeight="450" MinWidth="600">
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -24,25 +28,25 @@
             <Image Source="Images/English.png" Margin="1"></Image>
         </Button>
         <ScrollViewer Grid.Column="1" HorizontalAlignment="Center" Height="300" Grid.Row="2" VerticalAlignment="Center" Width="330" />
-        <RadioButton Content="Cycles:" HorizontalAlignment="Left" Margin="30,40,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True" Height="15" Width="55"/>
-        <TextBlock HorizontalAlignment="Left" Margin="120,40,0,0" Grid.Row="2" Text="01234" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="16" />
-        <RadioButton Content="or time and cycle rate:" HorizontalAlignment="Left" Margin="30,60,0,0" Grid.Row="2" VerticalAlignment="Top" Height="15" Width="136"/>
-        <TextBlock HorizontalAlignment="Left" Margin="50,80,0,0" Grid.Row="2" Text="Time (s):" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="50"/>
-        <TextBlock HorizontalAlignment="Left" Margin="120,80,0,0" Grid.Row="2" Text="01234" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="50,100,0,0" Grid.Row="2" Text="Cycle rate:" VerticalAlignment="Top" Height="16" Width="54"/>
-        <TextBlock HorizontalAlignment="Left" Margin="120,100,0,0" Grid.Row="2" Text="01234" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="16"/>
+        <RadioButton Content="{Binding CycleAmount}" HorizontalAlignment="Left" Margin="30,40,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True" Height="15" Width="97"/>
+        <TextBlock HorizontalAlignment="Left" Margin="132,40,0,0" Grid.Row="2" Text="01234" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="16" />
+        <RadioButton Content="{Binding CycleTime}" HorizontalAlignment="Left" Margin="30,60,0,0" Grid.Row="2" VerticalAlignment="Top" Height="15" Width="136"/>
+        <TextBlock HorizontalAlignment="Left" Margin="50,80,0,0" Grid.Row="2" Text="{Binding Time}" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="77"/>
+        <TextBlock HorizontalAlignment="Left" Margin="132,80,0,0" Grid.Row="2" Text="01234" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="50,100,0,0" Grid.Row="2" Text="{Binding CycleRate}" VerticalAlignment="Top" Height="16" Width="77"/>
+        <TextBlock HorizontalAlignment="Left" Margin="132,100,0,0" Grid.Row="2" Text="01234" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="16"/>
         <Button Content="+" Width="18"  HorizontalAlignment="Left" Margin="212,25,0,0" Grid.Row="2" VerticalAlignment="Top" Height="18" FontSize="11" />
         <Button Content="-" Width="18"  HorizontalAlignment="Left" Margin="212,50,0,0" Grid.Row="2" VerticalAlignment="Top" Height="18" FontSize="11" />
-        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="50" Height="25" />
-        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="100,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="50" Height="25" />
-        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="180,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="50" Height="25" />
-        <Button Content="GO" HorizontalAlignment="Left" Margin="100,165,0,0" Grid.Row="2" VerticalAlignment="Top" Width="56" Height="20"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="User input:" VerticalAlignment="Top" Height="15" Width="60"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="Generated ASM source:" VerticalAlignment="Top" Grid.Column="1" Height="16" Width="130"/>
-        <TextBlock HorizontalAlignment="Left" Margin="20,20,0,0" Grid.Row="2" Text="1.Decide whether to input:" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="140"/>
-        <TextBlock HorizontalAlignment="Left" Margin="20,130,0,0" Grid.Row="2" Text="2.Click on the GO-Button:" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="135"/>
-        <TextBlock HorizontalAlignment="Left" Margin="20,200,0,0" Grid.Row="2" Text="3.Save the source code:" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="124"/>
-        <TextBlock HorizontalAlignment="Left" Margin="30,250,0,0" Grid.Row="2" Text="or copy for Copy/Paste:" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="124"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="50" Height="25" ItemsSource="{Binding DropRegister}"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="100,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="50" Height="25" ItemsSource="{Binding DropRegister}"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="180,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="50" Height="25" ItemsSource="{Binding DropRegister}"/>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="100,165,0,0" Grid.Row="2" VerticalAlignment="Top" Width="56" Height="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="{Binding Input}" VerticalAlignment="Top" Height="15" Width="60"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="{Binding CodeTitle}" VerticalAlignment="Top" Grid.Column="1" Height="16" Width="130"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,20,0,0" Grid.Row="2" Text="{Binding InputType}" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="140"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,130,0,0" Grid.Row="2" Text="{Binding ButtonPress}" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="135"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,200,0,0" Grid.Row="2" Text="{Binding CodeSave}" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="124"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,250,0,0" Grid.Row="2" Text="{Binding CodeCopy}" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="124"/>
         <Image HorizontalAlignment="Left" Height="20" Margin="65,165,0,0" Grid.Row="2" VerticalAlignment="Top" Width="20" Source="Images/circle.png"/>
         <Button Name="btn1" Margin="0,270,0,0" VerticalAlignment="Top" Width="30" Height="30" Grid.Row="2">
             <Image Source="Images/copy.png"></Image>
